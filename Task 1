@@ -1,0 +1,94 @@
+-- Create Database
+
+CREATE DATABASE Student_Management;
+'''
+-- Connect Database
+\c Student_Management;
+
+-- Create Table
+CREATE TABLE Students (
+    StudentID SERIAL PRIMARY KEY,
+    Name VARCHAR(50),
+    Gender CHAR(1),
+    Age INT,
+    Grade VARCHAR(2),
+    MathScore INT,
+    ScienceScore INT,
+    EnglishScore INT
+);
+
+-- Insert Data
+INSERT INTO Students
+(Name, Gender, Age, Grade, MathScore, ScienceScore, EnglishScore)
+
+VALUES
+('Dev','M',21,'A+',75,85,80),
+('Priya','F',16,'A',95,90,92),
+('Aman','M',14,'B',76,81,72),
+('Neha','F',15,'A',89,94,90),
+('Rohan','M',16,'C',65,70,68),
+('Anjali','F',17,'A+',98,96,97),
+('Karan','M',15,'B+',82,78,85),
+('Simran','F',16,'A',91,89,93),
+('Arjun','M',17,'B',73,75,79),
+('Pooja','F',15,'A+',99,98,100);
+
+---------------------------------------------------
+-- TASK QUERIES
+---------------------------------------------------
+
+-- 1 Average Math Score
+SELECT AVG(MathScore) AS AvgMath
+FROM Students;
+
+-- 2 Highest Science Score
+SELECT MAX(ScienceScore) AS HighestScience
+FROM Students;
+
+-- 3 Count Students
+SELECT COUNT(*) AS TotalStudents
+FROM Students;
+
+-- 4 Students Scoring Above 90 in Math
+SELECT *
+FROM Students
+WHERE MathScore > 90;
+
+-- 5 Average Score by Grade
+SELECT Grade,
+AVG(MathScore) AS AvgMath
+FROM Students
+GROUP BY Grade;
+
+-- 6 Female Students
+SELECT *
+FROM Students
+WHERE Gender='F';
+
+-- 7 Students Age > 15
+SELECT *
+FROM Students
+WHERE Age>15;
+
+-- 8 Top Performer
+SELECT Name,
+(MathScore+ScienceScore+EnglishScore) AS Total
+FROM Students
+ORDER BY Total DESC
+LIMIT 1;
+
+-- 9 Overall Average Marks
+SELECT Name,
+ROUND(
+(MathScore+ScienceScore+EnglishScore)/3.0,
+2
+) AS AverageMarks
+FROM Students;
+
+-- 10 Update Grade
+UPDATE Students
+SET Grade='A+'
+WHERE StudentID=1;
+
+-- Check Final Data
+SELECT * FROM Students;
