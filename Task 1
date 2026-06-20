@@ -1,7 +1,6 @@
 -- Create Database
 
 CREATE DATABASE Student_Management;
-'''
 -- Connect Database
 \c Student_Management;
 
