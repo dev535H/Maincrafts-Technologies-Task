@@ -1,10 +1,10 @@
 -- Create Database
-
+```sql
 CREATE DATABASE Student_Management;
--- Connect Database
-\c Student_Management;
+```
 
 -- Create Table
+```sql
 CREATE TABLE Students (
     StudentID SERIAL PRIMARY KEY,
     Name VARCHAR(50),
@@ -15,8 +15,9 @@ CREATE TABLE Students (
     ScienceScore INT,
     EnglishScore INT
 );
-
+```
 -- Insert Data
+```sql
 INSERT INTO Students
 (Name, Gender, Age, Grade, MathScore, ScienceScore, EnglishScore)
 
@@ -31,63 +32,77 @@ VALUES
 ('Simran','F',16,'A',91,89,93),
 ('Arjun','M',17,'B',73,75,79),
 ('Pooja','F',15,'A+',99,98,100);
-
+```
 ---------------------------------------------------
 -- TASK QUERIES
 ---------------------------------------------------
 
 -- 1 Average Math Score
+```sql
 SELECT AVG(MathScore) AS AvgMath
 FROM Students;
-
+```
 -- 2 Highest Science Score
+```sql
 SELECT MAX(ScienceScore) AS HighestScience
 FROM Students;
-
+```
 -- 3 Count Students
+```sql
 SELECT COUNT(*) AS TotalStudents
 FROM Students;
-
+```
 -- 4 Students Scoring Above 90 in Math
+```sql
 SELECT *
 FROM Students
 WHERE MathScore > 90;
-
+```
 -- 5 Average Score by Grade
+```sql
 SELECT Grade,
 AVG(MathScore) AS AvgMath
 FROM Students
 GROUP BY Grade;
-
+```
 -- 6 Female Students
+```sql
 SELECT *
 FROM Students
 WHERE Gender='F';
-
+```
 -- 7 Students Age > 15
+```sql
 SELECT *
 FROM Students
 WHERE Age>15;
-
+```
 -- 8 Top Performer
+```sql
 SELECT Name,
 (MathScore+ScienceScore+EnglishScore) AS Total
 FROM Students
 ORDER BY Total DESC
 LIMIT 1;
-
+```
 -- 9 Overall Average Marks
+```sql
 SELECT Name,
 ROUND(
 (MathScore+ScienceScore+EnglishScore)/3.0,
 2
 ) AS AverageMarks
 FROM Students;
+```
 
 -- 10 Update Grade
+```sql
 UPDATE Students
 SET Grade='A+'
 WHERE StudentID=1;
+```
 
 -- Check Final Data
+```sql
 SELECT * FROM Students;
+```
